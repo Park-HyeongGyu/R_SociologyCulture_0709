@@ -1,0 +1,51 @@
+표본n = 85
+
+모집단의 크기가 200명이라고 가정 할 때
+신뢰수준 80%에서 표본오차 쁠마5.3퍼센트포인트
+최소표본수 85
+M이라고 답한 사람의 표본에서의 비율이 K라고 할 때 전체에서 K라고 답한사람의 비율이 K쁠마5.3퍼센트 포인트 안에 있다고 80퍼센트 잠당할 수 있다.
+https://kuduz.tistory.com/1220
+
+https://bioinformaticsandme.tistory.com/37
+> shapiro.test(df_for_last$score)
+
+	Shapiro-Wilk normality test
+
+data:  df_for_last$score
+W = 0.96983, p-value = 0.04363
+
+> shapiro.test(df_for_last$total_education)
+
+	Shapiro-Wilk normality test
+
+data:  df_for_last$total_education
+W = 0.90037, p-value = 7.237e-06
+->p-value의 값이 0.01보다 낮기에 전체 학원 시수는 정규분포를 따르지 않는다.
+->스피어만 상관계수를 활용해야함
+
+->스피어만 상관계수
+스피어만상관계수:두 연속형 변수의 분포가 정규분포(normal distribution)을 벗어날 때 사용하는 값.
+연속형 자료일 때는 각 측정값을 순위 척도 자료로 변환시켜서 계산함
+
+->실제 스피어만 상관계수 코드
+p-value기준:0.05
+> cor.test(score, total_education, method = "spearman")
+
+	Spearman's rank correlation rho
+
+data:  score and total_education
+S = 92696, p-value = 0.391
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+       rho 
+0.09423265 
+
+
+귀무가설:두 변수는 서로 상관관계가 없다.
+대립가설:두 변수는 서로 상관관계가 있다.
+p-value(0.391) > 유의수준(0.05)가 되어
+귀무가설을 채택한다. 즉 유의수준 0.05%아래에서 두 변수는 상관관계가 없다.
+
+
+결정계수(r^2) = 0.0042924982544656
+즉 이 회귀식의 정확도는 4%이다(자료를 4%정도 설명한다.)
